@@ -1,4 +1,5 @@
 #include "tiny/vm.hpp"
+#include <algorithm>
 #include <iostream>
 #include <stdexcept>
 #include <unordered_map>
@@ -77,7 +78,6 @@ double run(const Module& m, const std::string& entry) {
           args.push_back(stack.back());
           stack.pop_back();
         }
-        // args were pushed left-to-right so stack top is last arg
         std::reverse(args.begin(), args.end());
         frames.push_back({&fit->second, 0, stack.size()});
         for (int i = 0; i < argc; ++i) {
